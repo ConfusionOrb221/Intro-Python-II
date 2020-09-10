@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,7 +39,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
+player = Player("Nathan", room['outside'])
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +50,38 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def goDirection(player):
+    while True:
+        direction = input('Enter a cardinal direction: ')
+        direction = direction.lower()
+        try:
+            if direction == 'n':
+                return player.setRoom(player.room.n_to)
+            elif direction == 'e':
+                return player.setRoom(player.room.e_to)
+            elif direction == 's':
+                return player.setRoom(player.room.s_to)
+            elif direction == 'w':
+                return player.setRoom(player.room.w_to)
+            else:
+                raise Exception('Not a valid cardinal direction')
+        except:
+            print("Cant go there")
+
+
+def parseInput():
+    while True:
+        print(player.room.getRoom())
+
+        goDirection(player)
+
+parseInput()
+
+"""
+'n': player.setRoom(player.room.n_to),
+'e': player.setRoom(player.room.e_to),
+'s': player.setRoom(player.room.s_to),
+'w': player.setRoom(player.room.w_to)
+"""
+
